@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -6,16 +6,16 @@ using UnityEngine.Events;
 
 public abstract class BasePanel : MonoBehaviour
 {
-    //CanvasGroup×é¼şÊµÏÖ»ù±¾µÄpanelÃæ°åµÄµ­Èëµ­³öĞ§¹û
+    //CanvasGroupç»„ä»¶å®ç°åŸºæœ¬çš„panelé¢æ¿çš„æ·¡å…¥æ·¡å‡ºæ•ˆæœ
     public CanvasGroup canvasGroup;
-    //µ­Èëµ­³öËÙ¶È
+    //æ·¡å…¥æ·¡å‡ºé€Ÿåº¦
     public float alphaSpeed = 7f;
-    //ÍêÈ«µ­³öºóµÄÎ¯ÍĞ
+    //å®Œå…¨æ·¡å‡ºåçš„å§”æ‰˜
     public UnityAction hideMeCallBack;
     private bool isShowing;
     protected virtual void Awake()
     {
-        //×Ô¶¯¹ÒÔØCanvasGroup£¬±ÜÃâÍü¼ÇÊÖ¶¯¹ÒÔØ×é¼şµ¼ÖÂ¶¯»­Ê§Ğ§
+        //è‡ªåŠ¨æŒ‚è½½CanvasGroupï¼Œé¿å…å¿˜è®°æ‰‹åŠ¨æŒ‚è½½ç»„ä»¶å¯¼è‡´åŠ¨ç”»å¤±æ•ˆ
         canvasGroup = GetComponent<CanvasGroup>();
         if( canvasGroup == null)
         {
@@ -23,7 +23,7 @@ public abstract class BasePanel : MonoBehaviour
         }
     }
     /// <summary>
-    /// µ­³ö
+    /// æ·¡å‡º
     /// </summary>
     /// <param name="unityAction"></param>
     public virtual void Hide(UnityAction unityAction = null)
@@ -36,7 +36,7 @@ public abstract class BasePanel : MonoBehaviour
 
     }
     /// <summary>
-    /// µ­Èë
+    /// æ·¡å…¥
     /// </summary>
     public virtual void Show()
     {
@@ -44,7 +44,7 @@ public abstract class BasePanel : MonoBehaviour
         canvasGroup.alpha = 0;
     }
     /// <summary>
-    /// ÔÚstartÖĞ½øĞĞ³õÊ¼»¯°ó¶¨
+    /// åœ¨startä¸­è¿›è¡Œåˆå§‹åŒ–ç»‘å®š
     /// </summary>
     protected abstract void Init();
     // Start is called before the first frame update
@@ -56,14 +56,14 @@ public abstract class BasePanel : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //µ­Èë
+        //æ·¡å…¥
         if (isShowing && canvasGroup.alpha < 1f)
         {
             canvasGroup.alpha += alphaSpeed * Time.deltaTime;
             if (canvasGroup.alpha > 1) 
             canvasGroup.alpha = 1;
         }
-        //µ­³ö
+        //æ·¡å‡º
         else if (!isShowing)
         {
             canvasGroup.alpha -= alphaSpeed * Time.deltaTime;
