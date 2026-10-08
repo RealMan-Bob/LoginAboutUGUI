@@ -39,7 +39,7 @@ TextureImporter:
     mipBias: 0
     wrapU: 1
     wrapV: 1
-    wrapW: 0
+    wrapW: 1
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
@@ -106,7 +106,7 @@ TextureImporter:
         height: 338
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 430, y: 164, z: 1450, w: 154}
+      border: {x: 374, y: 164, z: 1462, w: 154}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -121,13 +121,13 @@ TextureImporter:
       name: "\u5143\u7D20 (5)_1"
       rect:
         serializedVersion: 2
-        x: 6
-        y: 1526
-        width: 1510
-        height: 175
+        x: 3
+        y: 1516
+        width: 1516
+        height: 172
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 1, y: 6, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0

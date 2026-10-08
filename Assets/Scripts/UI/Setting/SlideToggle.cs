@@ -38,10 +38,4 @@ public class SlideToggle : MonoBehaviour
 
         OnValueChanged?.Invoke(isOn);
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

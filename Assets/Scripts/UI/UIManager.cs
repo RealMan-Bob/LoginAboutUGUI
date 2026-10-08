@@ -47,15 +47,19 @@ public class UIManager
     {
         string panelName = typeof(T).Name;
 
-        if (panelDic.ContainsKey(panelName) )
+        if (panelDic.ContainsKey(panelName))
+        {
+            T pan= (T)panelDic[panelName];
+            pan.Show();
             return (T)panelDic[panelName];
-
+        }
         GameObject panelObj = GameObject.Instantiate(Resources.Load<GameObject>("UI/" + panelName));
         panelObj.transform.SetParent(canvasTrans,false);
 
         T panel=panelObj.GetComponent<T>();
         panelDic.Add(panelName,panel);
         panel.Show();
+        
         return panel;
     }
     /// <summary>

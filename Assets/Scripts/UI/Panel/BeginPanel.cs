@@ -1,11 +1,12 @@
-using DG.Tweening;
+ï»¿using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
-
+/// <summary>
+/// å¼€å§‹é¢æ¿ç±» ç™»å½•åæ˜¾ç¤ºçš„ä¸»ç•Œé¢
+/// </summary>
 public class BeginPanel : BasePanel
 {
     public Button playBtn;
@@ -16,16 +17,17 @@ public class BeginPanel : BasePanel
     public Button rankBtn;
 
 
-    [Header("°´Å¥µã»÷¶¯»­²ÎÊı")]
-    public float pressScale = 0.9f;    // °´ÏÂËõĞ¡µ½¶àÉÙ
-    public float animDuration = 0.1f; // ¶¯»­Ê±¼ä
+    [Header("æŒ‰é’®ç‚¹å‡»åŠ¨ç”»å‚æ•°")]
+    public float pressScale = 0.9f;    // æŒ‰ä¸‹ç¼©å°åˆ°å¤šå°‘
+    public float animDuration = 0.1f; // åŠ¨ç”»æ—¶é—´
     protected override void Init()
     {
-        #region °´Å¥µã»÷ÊÂ¼ş°ó¶¨
+        #region æŒ‰é’®ç‚¹å‡»äº‹ä»¶ç»‘å®š
         playBtn.onClick.AddListener(() =>
         {
             PlayButtonPressAnim(playBtn);
             UIManager.Instance.HidePanel<BeginPanel>();
+            UIManager.Instance.ShowPanel<LoginPanel>();
         });
         registBtn.onClick.AddListener(() =>
         {
@@ -46,6 +48,8 @@ public class BeginPanel : BasePanel
         {
             PlayButtonPressAnim(settingBtn);
             UIManager.Instance.HidePanel<BeginPanel>();
+            UIManager.Instance.ShowPanel<SettingPanel>();
+           
         });
         rankBtn.onClick.AddListener(() =>
         {
@@ -56,20 +60,20 @@ public class BeginPanel : BasePanel
 
     }
     /// <summary>
-    /// °´Å¥ÏÂÏİ»Øµ¯¶¯»­
+    /// æŒ‰é’®ä¸‹é™·å›å¼¹åŠ¨ç”»
     /// </summary>
     private void PlayButtonPressAnim(Button btn)
     {
-        // Í£Ö¹µ±Ç°°´Å¥ÕıÔÚ²¥·ÅµÄ¶¯»­£¬·ÀÖ¹Á¬µã´íÂÒ
+        // åœæ­¢å½“å‰æŒ‰é’®æ­£åœ¨æ’­æ”¾çš„åŠ¨ç”»ï¼Œé˜²æ­¢è¿ç‚¹é”™ä¹±
         btn.transform.DOKill();
 
-        // ĞòÁĞ£ºËõĞ¡(°´ÏÂ) ¡ú »Ö¸´Ô­´óĞ¡(ËÉ¿ª)
+        // åºåˆ—ï¼šç¼©å°(æŒ‰ä¸‹) â†’ æ¢å¤åŸå¤§å°(æ¾å¼€)
         DOTween.Sequence()
             .Append(btn.transform.DOScale(pressScale, animDuration))
             .Append(btn.transform.DOScale(1f, animDuration));
     }
 
-    // Ãæ°åÒş²ØÊ±ÇåÀí¶¯»­£¬¿ÉÑ¡ÓÅ»¯
+    // é¢æ¿éšè—æ—¶æ¸…ç†åŠ¨ç”»ï¼Œå¯é€‰ä¼˜åŒ–
     public override void Hide(UnityAction unityAction = null)
     {
         base.Hide(null);
