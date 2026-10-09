@@ -1,9 +1,9 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Êı¾İÀà¡¢ÓÃÓÚ×°ÔØµÇÂ¼ĞÅÏ¢
+/// æ•°æ®ç±»ã€ç”¨äºè£…è½½ç™»å½•ä¿¡æ¯
 /// </summary>
 public class LoginData
 {

@@ -1,14 +1,14 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 /// <summary>
-/// µÇÂ¼Ãæ°åÀà
+/// ç™»å½•é¢æ¿ç±»
 /// </summary>
 public class LoginPanel : BasePanel
 {
-    //panel¿Ø¼ş
+    //panelæ§ä»¶
     public InputField accountInput;
     public InputField passwordInput;
 
@@ -18,21 +18,39 @@ public class LoginPanel : BasePanel
     public Button loginBtn;
     public Button registerBtn;
 
-    public Button closeBtn;
-
     protected override void Init()
     {
-        //µÇÂ¼°´Å¥¼àÌı
+        //ç™»å½•æŒ‰é’®ç›‘å¬
         loginBtn.onClick.AddListener(() =>
         {
-            UIManager.Instance.HidePanel<LoginPanel>();
+            //é•¿åº¦åˆ¤æ–­
+            if (accountInput.text.Length < 6 || passwordInput.text.Length < 6)
+            {
+                TipPanel tip = UIManager.Instance.ShowPanel<TipPanel>();
+                tip.SetTips("ç”¨æˆ·åå’Œå¯†ç å¿…é¡»éƒ½å¤§äºå…­");
+            }
+            //ç™»å½•éªŒè¯
+            if (LoginMgr.Instance.CheckUserInfo(accountInput.text,passwordInput.text))
+            {
+                LoginMgr.Instance.LoginData.account = accountInput.text;
+                LoginMgr.Instance.LoginData.password = passwordInput.text;
+                LoginMgr.Instance.LoginData.rememberPwd = rememberPwdTog.isOn;
+                LoginMgr.Instance.LoginData.autoLogin = autoLoginTog.isOn;
+                LoginMgr.Instance.SaveLoginData();
+                UIManager.Instance.HidePanel<LoginPanel>();
+            }
+            else
+            {
+                UIManager.Instance.ShowPanel<TipPanel>().SetTips("ç”¨æˆ·åæˆ–å¯†ç é”™è¯¯");
+            }
+
         });
-        //×¢²á°´Å¥¼àÌı
+        //æ³¨å†ŒæŒ‰é’®ç›‘å¬
         registerBtn.onClick.AddListener(() =>
         {
-            UIManager.Instance.HidePanel<LoginPanel>();
+            UIManager.Instance.ShowPanel<RegisterPanel>();
         });
-        //¼Ç×¡ÃÜÂëTog¼àÌı
+        //è®°ä½å¯†ç Togç›‘å¬
         rememberPwdTog.onValueChanged.AddListener((isOn) =>
         {
             if (!isOn)
@@ -40,7 +58,7 @@ public class LoginPanel : BasePanel
                 autoLoginTog.isOn = false;
             }
         });
-        //×Ô¶¯µÇÂ¼Tog¼àÌı
+        //è‡ªåŠ¨ç™»å½•Togç›‘å¬
         autoLoginTog.onValueChanged.AddListener((isOn) =>
         {
             if (isOn)
@@ -48,38 +66,47 @@ public class LoginPanel : BasePanel
                 rememberPwdTog.isOn = true;
             }
         });
-        closeBtn.onClick.AddListener(() =>
-        {
-            UIManager.Instance.ShowPanel<BeginPanel>();
-            UIManager.Instance.HidePanel<LoginPanel>();
-            
-        });
     }
 
     public override void Show()
     {
         base.Show();
-        //µÃµ½Êı¾İ
+        //å¾—åˆ°æ•°æ®
         LoginData loginData=LoginMgr.Instance.LoginData;
 
-        rememberPwdTog.isOn = loginData.rememberPwd;
-        autoLoginTog.isOn = loginData.autoLogin;
-
-        accountInput.text = loginData.account;
-
-        //¼Ç×¡ÃÜÂë
-        if (rememberPwdTog.isOn)
+        if (loginData != null) 
         {
-            passwordInput.text = loginData.password;
+            if (rememberPwdTog.isOn)
+            {
+                rememberPwdTog.isOn = loginData.rememberPwd;
+                autoLoginTog.isOn = loginData.autoLogin;
+
+                accountInput.text = loginData.account;
+            }
+            //è®°ä½å¯†ç 
+            if (rememberPwdTog.isOn)
+            {
+                passwordInput.text = loginData.password;
+            }
+            else
+            {
+                passwordInput.text = "";
+            }
         }
-        else
-        {
-            passwordInput.text = "";
-        }
-        //×Ô¶¯µÇÂ¼
+        //è‡ªåŠ¨ç™»å½•
         if (autoLoginTog.isOn)
         {
 
         }
+    }
+    /// <summary>
+    /// æä¾›ç»™å¤–éƒ¨ä¿®æ”¹å½“å‰é¢æ¿çš„ä¿¡æ¯
+    /// </summary>
+    /// <param name="userName"></param>
+    /// <param name="password"></param>
+    public void SetInfo(string userName,string password)
+    {
+        accountInput.text = userName;
+        passwordInput.text = password;
     }
 }

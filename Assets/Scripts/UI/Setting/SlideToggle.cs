@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
-
+/// <summary>
+/// 调节开关类、用于设置面板的音效、音乐开关
+/// </summary>
 public class SlideToggle : MonoBehaviour
 {
     [Header("内部引用")]

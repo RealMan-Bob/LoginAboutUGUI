@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
-
+/// <summary>
+/// 面板基类 、用于实现面板的淡入淡出效果
+/// </summary>
 public abstract class BasePanel : MonoBehaviour
 {
     //CanvasGroup组件实现基本的panel面板的淡入淡出效果
     public CanvasGroup canvasGroup;
     //淡入淡出速度
-    public float alphaSpeed = 7f;
+    public float alphaSpeed = 3f;
     //完全淡出后的委托
     public UnityAction hideMeCallBack;
     private bool isShowing;
