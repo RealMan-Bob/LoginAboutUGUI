@@ -20,8 +20,13 @@ public class LoginMgr
     //注册数据
     private RegisterData registerData;
     public RegisterData RegisterData => registerData;
-
+    //登录数据
     public LoginData LoginData => loginData;
+
+    //服务器数据
+    private List<ServerInfo> serverData;
+
+    public List<ServerInfo> ServerData => serverData;
     //构造函数
     private LoginMgr()
     {
@@ -29,6 +34,8 @@ public class LoginMgr
         loginData = JsonMgr.Instance.LoadData<LoginData>("LoginData");
         //读取注册数据
         registerData = JsonMgr.Instance.LoadData<RegisterData>("RegisterData");
+        //获取服务器数据
+        serverData = JsonMgr.Instance.LoadData<List<ServerInfo>>("ServerInfo");
     }
     /// <summary>
     /// 存储登录数据
