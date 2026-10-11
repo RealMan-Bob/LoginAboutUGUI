@@ -38,6 +38,7 @@ public class LoginPanel : BasePanel
                 LoginMgr.Instance.LoginData.autoLogin = autoLoginTog.isOn;
                 LoginMgr.Instance.SaveLoginData();
                 UIManager.Instance.HidePanel<LoginPanel>();
+                UIManager.Instance.ShowPanel<ServerPanel>();
             }
             else
             {

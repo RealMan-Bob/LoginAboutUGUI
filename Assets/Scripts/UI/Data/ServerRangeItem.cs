@@ -20,7 +20,8 @@ public class ServerRangeItem : MonoBehaviour
     {
         btnSelf.onClick.AddListener(() =>
         {
-
+            ChooseServerPanel panel = UIManager.Instance.GetPanel<ChooseServerPanel>();
+            panel.UpdateRightItem(beginIndex, endIndex);
         });
     }
 

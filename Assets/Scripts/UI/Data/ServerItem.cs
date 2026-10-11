@@ -20,12 +20,14 @@ public class ServerItem : MonoBehaviour
         btnSelf.onClick.AddListener(() =>
         {
             LoginMgr.Instance.LoginData.frontServerId = nowServerInfo.id;
-            //点击按钮时，设置当前服务器信息
-            UIManager.Instance.GetPanel<ServerPanel>().SetserverInfo(nowServerInfo.name, nowServerInfo.state);
             //隐藏选择服务器面板
             UIManager.Instance.HidePanel<ChooseServerPanel>();
             //显示当前服务器面板
             UIManager.Instance.ShowPanel<ServerPanel>();
+            //点击按钮时，设置当前服务器信息
+            UIManager.Instance.GetPanel<ServerPanel>()?.SetserverInfo(nowServerInfo.name, nowServerInfo.state,id:nowServerInfo.id);
+
+          
         });
     }
     

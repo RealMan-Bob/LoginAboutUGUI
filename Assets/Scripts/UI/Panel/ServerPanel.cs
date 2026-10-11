@@ -1,9 +1,9 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 /// <summary>
-/// µ±Ç°·şÎñÆ÷Ãæ°å
+/// å½“å‰æœåŠ¡å™¨é¢æ¿
 /// </summary>
 public class ServerPanel : BasePanel
 {
@@ -11,8 +11,15 @@ public class ServerPanel : BasePanel
     public Button changeBtn;
 
     public Text serverInfo;
+
+    public Button backBtn;
     protected override void Init()
     {
+        backBtn.onClick.AddListener(() =>
+        {
+            UIManager.Instance.HidePanel<ServerPanel>();
+            UIManager.Instance.ShowPanel<LoginPanel>();
+        });
         entryBtn.onClick.AddListener(() =>
         {
 
@@ -20,27 +27,50 @@ public class ServerPanel : BasePanel
         });
         changeBtn.onClick.AddListener(() =>
         {
-
+            UIManager.Instance.HidePanel<ServerPanel>();
+            UIManager.Instance.ShowPanel<ChooseServerPanel>();
 
         });
     }
-    //¸ù¾İ·şÎñÆ÷×´Ì¬ÉèÖÃ·şÎñÆ÷ĞÅÏ¢
-    public void SetserverInfo(string info,int state)
+    //æ˜¾ç¤ºå½“å‰é¢æ¿æ—¶è¿›è¡ŒæœåŠ¡å™¨é€‰æ‹©ä¿¡æ¯è¯»å–
+    public override void Show()
+    {
+        base.Show();
+        if (LoginMgr.Instance.LoginData.frontServerId<=0)
+        {
+            SetserverInfo("è¯·é€‰æ‹©æœåŠ¡å™¨",-1);
+        }
+        else
+        {
+            ServerInfo info = LoginMgr.Instance.ServerData[LoginMgr.Instance.LoginData.frontServerId-1];
+            if (info != null)
+            {
+                SetserverInfo(info.name,info.state);
+            }
+        }
+    }
+    //æ ¹æ®æœåŠ¡å™¨çŠ¶æ€è®¾ç½®æœåŠ¡å™¨ä¿¡æ¯
+    public void SetserverInfo(string info,int state, int? id = null)
     {
         switch (state)
         {
             case 0:
-                info += "£¨Î¬»¤ÖĞ£©";
+                info += "ï¼ˆç»´æŠ¤ä¸­ï¼‰";
                 break;
             case 1:
-                info += "£¨Õı³££©";
+                info += "ï¼ˆæ­£å¸¸ï¼‰";
                 break;
             case 2:
-                info += "£¨»ğ±¬£©";
+                info += "ï¼ˆç«çˆ†ï¼‰";
                 break;
             default:
-                info += "£¨Î´Öª×´Ì¬£©";
+                info += "ï¼ˆæœªçŸ¥çŠ¶æ€ï¼‰";
                 break;
+        }
+        if (id!=null)
+        {
+            serverInfo.text =id+"åŒº" + info;
+            return;
         }
         serverInfo.text = info;
     }
